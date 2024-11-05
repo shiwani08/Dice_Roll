@@ -1,4 +1,5 @@
 import 'package:dice_roll/roll-dice.dart';
+import 'package:dice_roll/SevenUpDown.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,7 +11,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       // Scaffold builds a good screen for the app and generally uses body function
       home: Scaffold(
-        body: RollDice(),
+        body: SevenUpSevenDown(),
       ),
     ),
   );
