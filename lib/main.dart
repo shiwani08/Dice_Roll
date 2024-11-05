@@ -7,6 +7,7 @@ void main() {
 
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       // Scaffold builds a good screen for the app and generally uses body function
       home: Scaffold(
         body: RollDice(),
