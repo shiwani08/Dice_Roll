@@ -50,13 +50,15 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(diceImage1, width: 100),
-              const SizedBox(width: 10),
-              Image.asset(diceImage2, width: 100),
-            ],
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(diceImage1, width: 100),
+                const SizedBox(width: 10),
+                Image.asset(diceImage2, width: 100),
+              ],
+            ),
           ),
 
           const SizedBox(width: 40,),
