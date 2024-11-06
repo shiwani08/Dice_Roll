@@ -58,6 +58,9 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
               Image.asset(diceImage2, width: 100),
             ],
           ),
+
+          const SizedBox(width: 40,),
+
           const SizedBox(height: 20),
           Text(
             resultMessage,
@@ -67,7 +70,8 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
             "Score: $score",
             style: const TextStyle(fontSize: 20),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 40),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

@@ -7,7 +7,7 @@ void main() {
 
   runApp(
     MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       // Scaffold builds a good screen for the app and generally uses body function
       home: Scaffold(
         extendBodyBehindAppBar: true,
@@ -22,7 +22,7 @@ void main() {
                 color: Colors.black
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 28.0, left: 15),
+                padding: const EdgeInsets.only(top: 35.0, left: 15),
                 child: Text(
                   '7 Up & Down',
                   style: TextStyle(
