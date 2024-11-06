@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:dice_roll/change-dice.dart';
+import 'package:dice_roll/SevenUpDown.dart';
 
 class RollDice extends StatelessWidget {
-  RollDice({super.key});
-
-  var changeNum = 'assets/images/dice-1.png';
+  const RollDice({super.key});
 
   @override
   Widget build(context) {
@@ -17,7 +15,7 @@ class RollDice extends StatelessWidget {
           ],
         ),
       ),
-      child: const ChangeDice(),
+      child: const SevenUpSevenDown(),
     );
   }
 }
