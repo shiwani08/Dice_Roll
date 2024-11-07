@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:dice_roll/animation.dart';
+import 'package:dice_roll/sound_effects.dart';
 import 'dart:math';
 
 class SevenUpSevenDown extends StatefulWidget {
@@ -9,11 +11,27 @@ class SevenUpSevenDown extends StatefulWidget {
 }
 
 class SevenUpSevenDownState extends State<SevenUpSevenDown> {
+  late Widget diceAnimation1;
+  late Widget diceAnimation2;
+
   String playerChoice = '';
   int score = 0;
   String resultMessage = '';
   String diceImage1 = 'assets/images/dice-1.png';
   String diceImage2 = 'assets/images/dice-1.png';
+
+  @override
+  void initState() {
+    super.initState();
+    diceAnimation1 = DiceAnimation(
+      child: Image.asset(diceImage1, width: 100),
+      diceImage: diceImage1,
+    );
+    diceAnimation2 = DiceAnimation(
+      child: Image.asset(diceImage2, width: 100),
+      diceImage: diceImage2,
+    );
+  }
 
   void rollDice() {
     var roll1 = Random().nextInt(6) + 1;
