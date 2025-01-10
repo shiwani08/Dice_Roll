@@ -11,9 +11,6 @@ class SevenUpSevenDown extends StatefulWidget {
 }
 
 class SevenUpSevenDownState extends State<SevenUpSevenDown> {
-  late Widget diceAnimation1;
-  late Widget diceAnimation2;
-
   String playerChoice = '';
   int score = 0;
   String resultMessage = '';
@@ -23,14 +20,6 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
   @override
   void initState() {
     super.initState();
-    diceAnimation1 = DiceAnimation(
-      child: Image.asset(diceImage1, width: 100),
-      diceImage: diceImage1,
-    );
-    diceAnimation2 = DiceAnimation(
-      child: Image.asset(diceImage2, width: 100),
-      diceImage: diceImage2,
-    );
   }
 
   void rollDice() {
@@ -79,7 +68,7 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
             ),
           ),
 
-          const SizedBox(width: 40,),
+          const SizedBox(height: 40), // Fixed incorrect `SizedBox` parameter
 
           const SizedBox(height: 20),
           Text(
@@ -97,35 +86,41 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
             children: [
               ElevatedButton(
                 onPressed: () => setChoice('7 Up'),
-                style: TextButton.styleFrom(
+                style: ElevatedButton.styleFrom( // Fixed style builder
                   backgroundColor: Colors.grey,
                 ),
-                child: Text('7 Up',
-                style: TextStyle(
-                  color: Colors.green.shade100,
-                ),),
+                child: Text(
+                  '7 Up',
+                  style: TextStyle(
+                    color: Colors.green.shade100,
+                  ),
+                ),
               ),
 
               ElevatedButton(
                 onPressed: () => setChoice('7 Exact'),
-                style: TextButton.styleFrom(
+                style: ElevatedButton.styleFrom( // Fixed style builder
                   backgroundColor: Colors.grey,
                 ),
-                child: Text('7 Exact',
+                child: Text(
+                  '7 Exact',
                   style: TextStyle(
                     color: Colors.green.shade100,
-                  ),),
+                  ),
+                ),
               ),
 
               ElevatedButton(
                 onPressed: () => setChoice('7 Down'),
-                style: TextButton.styleFrom(
+                style: ElevatedButton.styleFrom( // Fixed style builder
                   backgroundColor: Colors.grey,
                 ),
-                child: Text('7 Down',
+                child: Text(
+                  '7 Down',
                   style: TextStyle(
                     color: Colors.green.shade100,
-                  ),),
+                  ),
+                ),
               ),
             ],
           ),
