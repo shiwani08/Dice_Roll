@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dice_roll/animation.dart';
-import 'package:dice_roll/sound_effects.dart';
 import 'dart:math';
 
 class SevenUpSevenDown extends StatefulWidget {
@@ -14,8 +12,8 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
   String playerChoice = '';
   int score = 0;
   String resultMessage = '';
-  String diceImage1 = 'assets/images/dice-1.png';
-  String diceImage2 = 'assets/images/dice-1.png';
+  int currentDice1 = 1; // Track the dice values
+  int currentDice2 = 1;
 
   @override
   void initState() {
@@ -23,23 +21,28 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
   }
 
   void rollDice() {
-    var roll1 = Random().nextInt(6) + 1;
-    var roll2 = Random().nextInt(6) + 1;
-    var sum = roll1 + roll2;
-
     setState(() {
-      diceImage1 = 'assets/images/dice-$roll1.png';
-      diceImage2 = 'assets/images/dice-$roll2.png';
+      resultMessage = ''; // Clear the result message while rolling
+    });
 
-      // Determine result
-      if ((sum > 7 && playerChoice == '7 Up') ||
-          (sum < 7 && playerChoice == '7 Down') ||
-          (sum == 7 && playerChoice == '7 Exact')) {
-        resultMessage = 'You Win!';
-        score++;
-      } else {
-        resultMessage = 'You Lose!';
-      }
+    // Simulate rolling animation
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        currentDice1 = Random().nextInt(6) + 1;
+        currentDice2 = Random().nextInt(6) + 1;
+
+        var sum = currentDice1 + currentDice2;
+
+        // Determine result
+        if ((sum > 7 && playerChoice == '7 Up') ||
+            (sum < 7 && playerChoice == '7 Down') ||
+            (sum == 7 && playerChoice == '7 Exact')) {
+          resultMessage = 'You Win!';
+          score++;
+        } else {
+          resultMessage = 'You Lose!';
+        }
+      });
     });
   }
 
@@ -57,20 +60,40 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(diceImage1, width: 100),
-                const SizedBox(width: 10),
-                Image.asset(diceImage2, width: 100),
-              ],
-            ),
+          // Animated dice
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation) => RotationTransition(
+                  turns: animation,
+                  child: child,
+                ),
+                child: Image.asset(
+                  'assets/images/dice-$currentDice1.png',
+                  key: ValueKey<int>(currentDice1), // Unique key for animation
+                  width: 100,
+                ),
+              ),
+              const SizedBox(width: 10),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation) => RotationTransition(
+                  turns: animation,
+                  child: child,
+                ),
+                child: Image.asset(
+                  'assets/images/dice-$currentDice2.png',
+                  key: ValueKey<int>(currentDice2), // Unique key for animation
+                  width: 100,
+                ),
+              ),
+            ],
           ),
 
-          const SizedBox(height: 40), // Fixed incorrect `SizedBox` parameter
+          const SizedBox(height: 40),
 
-          const SizedBox(height: 20),
           Text(
             resultMessage,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -86,7 +109,7 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
             children: [
               ElevatedButton(
                 onPressed: () => setChoice('7 Up'),
-                style: ElevatedButton.styleFrom( // Fixed style builder
+                style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
                 ),
                 child: Text(
@@ -96,10 +119,9 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
                   ),
                 ),
               ),
-
               ElevatedButton(
                 onPressed: () => setChoice('7 Exact'),
-                style: ElevatedButton.styleFrom( // Fixed style builder
+                style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
                 ),
                 child: Text(
@@ -109,10 +131,9 @@ class SevenUpSevenDownState extends State<SevenUpSevenDown> {
                   ),
                 ),
               ),
-
               ElevatedButton(
                 onPressed: () => setChoice('7 Down'),
-                style: ElevatedButton.styleFrom( // Fixed style builder
+                style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey,
                 ),
                 child: Text(
